@@ -9,7 +9,7 @@
     <!--<button onclick="whichBrowser()">Which browser?</button>-->
 
     <script>
-        //document.write("<p>" + "If I had nine hours to chop down a tree, I'd spend the first six sharpening my ax." + "</p><p>" + "-- Abraham Lincoln" + "</p>");
+        document.write("\"If I had nine hours to chop down a tree, I'd spend the first six sharpening my ax.\"<br> --Abraham Lincoln");
 
         //var isStudent = confirm("Are you a student?");
 
@@ -40,12 +40,17 @@
         }
 
         function whichBrowser() {
-            if (navigator.appCodeName == "Mozilla") {
-                window.location.replace("http://mozilla.org");
+            var browser = navigator.appVersion;
+
+            if (browser.indexOf("Mozilla") > 0) {
+                location.replace("http://mozilla.org");
             } else {
-                window.location.replace("http://microsoft.com");
+                location.replace("http://microsoft.com");
             }
         }
+
+        var element = document.getElementsByTagName("h2");
+        element.innerHTML = "liibalaaba";
 
     </script>
 
