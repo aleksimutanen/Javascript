@@ -16,107 +16,7 @@
         width: 50%;
     }
 </style>
-<script>
 
-<!-- JavaScript goes here-- >
-
-    function buttonOneClicked() {
-        var date = new Date();
-        alert("You clicked me! " + date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
-    }
-
-    function buttonTwoClicked() {
-        var table = `
-        <table id="example" class="display" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Salary</th>
-            </tr>
-        </thead>
-        <tfoot>
-        </tfoot>
-        <tbody>
-            <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>$320,800</td>
-            </tr>
-            <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>$170,750</td>
-            </tr>
-            <tr>
-                <td>Ashton Cox</td>
-                <td>Junior Technical Author</td>
-                <td>$86,000</td>
-            </tr>
-            <tr>
-                <td>Cedric Kelly</td>
-                <td>Senior Javascript Developer</td>
-                <td>$433,060</td>
-            </tr>
-            <tr>
-                <td>Airi Satou</td>
-                <td>Accountant</td>
-                <td>$162,700</td>
-            </tr>
-
-        </tbody>
-    </table>
-        `;
-
-        document.write(table);
-    }
-
-    function buttonThreeClicked() {
-        var table = `
-        <table id="example" class="display" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Country</th>
-            </tr>
-        </thead>
-        <tfoot>
-        </tfoot>
-        <tbody>
-            <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>$320,800</td>
-            </tr>
-            <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>$170,750</td>
-            </tr>
-            <tr>
-                <td>Ashton Cox</td>
-                <td>Junior Technical Author</td>
-                <td>$86,000</td>
-            </tr>
-            <tr>
-                <td>Cedric Kelly</td>
-                <td>Senior Javascript Developer</td>
-                <td>$433,060</td>
-            </tr>
-            <tr>
-                <td>Airi Satou</td>
-                <td>Accountant</td>
-                <td>$162,700</td>
-            </tr>
-
-        </tbody>
-    </table>
-        `;
-    }
-
-
-</script>
 
 <h1>Workshop 3: JavaScript Events</h1>
 <hr />
@@ -131,7 +31,7 @@
 <p>
     <button onclick="buttonOneClicked()">Button 1</button>
     <button onclick="buttonTwoClicked()">Button 2</button>
-    <button>Button 3</button>
+    <button onclick="buttonThreeClicked()">Button 3</button>
 </p>
 
 <ul>
@@ -211,7 +111,8 @@
     </xmp>
 </ul>
 
-<h2>Exercise 2</h2>
+<!--<h2 onmouseover="mouseOverHeadline()" onmouseout="mouseLeaveHeadline()">Exercise 2</h2>-->
+<h2 id="myBtn">Exercise 2</h2>
 
 <ul>
     <li>
@@ -237,7 +138,8 @@
 </ul>
 <form>
     <textarea id="textdata"></textarea><br>
-    <button>Send me</button>
+    <button id="send">Send me</button>
+    <p id="display"></p>
 </form>
 <h2>Exercise 4</h2>
 So far you have hardcoded the events into HTML tags. Make a copy of your exercise file and try to add the events dynamically, without touching the HTML at all. This can be
@@ -246,7 +148,7 @@ achieved using addEventListener() -function,
 
 <h2>Exercise 5</h2>
 
-<div id="coordinates"></div>
+<div id="coordinates" onmousemove="showCoordinates(event)"></div>
 
 <p>
     Add onMouseMove -event to the DIV-element above. When you move mouse over the DIV (rectangle) the program should output the coordinates of your pointer. Try first
@@ -259,7 +161,7 @@ achieved using addEventListener() -function,
 document.getElementById("coordinates").innerHTML to achieve this.
 
 <H2>Exercise 6</H2>
-<button>Get location</button>
+<button id="geoLocation">Get location</button>
 <button>Show location</button>
 
 <li>
@@ -271,4 +173,157 @@ document.getElementById("coordinates").innerHTML to achieve this.
     "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false" where latlon is your latitude + longitute data separated by
     comma (,).
 </li>
+
+<script>
+
+<!--    JavaScript goes here-- >
+
+        function buttonOneClicked() {
+            var date = new Date();
+            alert("You clicked me! " + date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
+        }
+
+    function buttonTwoClicked() {
+        var table = `
+        <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tfoot>
+        </tfoot>
+        <tbody>
+            <tr>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>$320,800</td>
+            </tr>
+            <tr>
+                <td>Garrett Winters</td>
+                <td>Accountant</td>
+                <td>$170,750</td>
+            </tr>
+            <tr>
+                <td>Ashton Cox</td>
+                <td>Junior Technical Author</td>
+                <td>$86,000</td>
+            </tr>
+            <tr>
+                <td>Cedric Kelly</td>
+                <td>Senior Javascript Developer</td>
+                <td>$433,060</td>
+            </tr>
+            <tr>
+                <td>Airi Satou</td>
+                <td>Accountant</td>
+                <td>$162,700</td>
+            </tr>
+
+        </tbody>
+    </table>
+        `;
+
+        document.write(table);
+    }
+
+    function buttonThreeClicked() {
+        var persons = ["Nyssa P. Skinner", "593-4241 Lacus, St.", "Cape Verde",
+            "Camilla F. Strickland", "391-2150 Ac Rd.", "Andorra",
+            "Reagan U. Andrews", "P.O. Box 472, 2271 Mauris Ave", "Faroe Islands",
+            "Kelsey D. Clark", "P.O. Box 866, 7793 Aliquet Ave", "Bulgaria"
+        ];
+
+        document.write(`<table id="example" class="display" cellspacing="0" width="50%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tfoot>
+        </tfoot>
+        <tbody>
+            `);
+
+        for (var i = 0; i < persons.length; i++) {
+            document.write("<tr>");
+            for (var k = 0; k < 3; k++) {
+                document.write("<td>" + persons[k + i] + "</td>");
+            }
+            document.write("</tr>");
+            i += 2;
+        }
+
+        document.write("</tbody></table>");
+    }
+
+    function mouseOverHeadline() {
+        console.log("Stepped over by a mouse");
+    }
+
+    function mouseLeaveHeadline() {
+        console.log("Bye bye mouse!");
+    }
+
+    var keyCount = 0;
+
+    var b = document.getElementById("myBtn");
+    b.addEventListener("mouseover", mouseOverHeadline);
+    b.addEventListener("mouseleave", mouseLeaveHeadline);
+
+    var textarea = document.getElementById("textdata");
+    textarea.addEventListener("click", function () {
+        textarea.innerHTML = "Please fill in the form with proper data.";
+        textarea.style.backgroundColor = "red";
+    });
+
+    textarea.addEventListener("keydown", function () {
+        console.log("key was pressed");
+        keyCount++;
+        document.getElementById("display").innerHTML = keyCount + "";
+    });
+
+    var send = document.getElementById("send");
+    send.addEventListener("click", function () {
+        if (textarea.innerText == "") {
+            alert("your field is empty");
+        } else {
+            alert("sent");
+        }
+    });
+
+    function showCoordinates(event) {
+        var xAxis = event.clientX;
+        var yAxis = event.clientY;
+
+        console.log(xAxis + ", " + yAxis);
+
+        document.getElementById("coordinates").innerHTML = xAxis + ", " + yAxis;
+    }
+
+    var geoLocation = document.getElementById("geoLocation");
+    geoLocation.addEventListener("click", function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            console.log("not allowed by browser");
+        }
+    });
+
+    function showPosition(position) {
+        console.log("Latitude: " + position.coords.latitude +
+            "Longitude: " + position.coords.longitude);
+        showPositionOnMap(position);
+    }
+
+    function showPositionOnMap(position) {
+        location.replace("https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=14&size=400x300&sensor=false");
+    }
+
+
+</script>
 </HTML>
