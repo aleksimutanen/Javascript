@@ -162,7 +162,7 @@ document.getElementById("coordinates").innerHTML to achieve this.
 
 <H2>Exercise 6</H2>
 <button id="geoLocation">Get location</button>
-<button>Show location</button>
+<button id="locationOnMap">Show location</button>
 
 <li>
     The first button should check <a href="https://www.w3schools.com/html/html5_geolocation.asp">Geolocation</a> of the user, and output it to the console and to the
@@ -314,10 +314,20 @@ document.getElementById("coordinates").innerHTML to achieve this.
         }
     });
 
+    var locationOnMap = document.getElementById("locationOnMap");
+    locationOnMap.addEventListener("click", function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPositionOnMap);
+        } else {
+            console.log("not allowed by browser");
+        }
+    });
+
     function showPosition(position) {
-        console.log("Latitude: " + position.coords.latitude +
-            "Longitude: " + position.coords.longitude);
-        showPositionOnMap(position);
+        var pos = "Latitude: " + position.coords.latitude +
+            " Longitude: " + position.coords.longitude;
+        console.log(pos);
+        document.write(pos);
     }
 
     function showPositionOnMap(position) {

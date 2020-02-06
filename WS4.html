@@ -1,0 +1,296 @@
+<HTML>
+<style>
+body {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	color: #333333;
+}
+
+div {
+    width: 200px;
+    height: 100px;
+    border: 1px solid black;
+}
+table, tr, td{
+  border: 1px solid gray;
+  width: 50%;
+}
+img {
+    position: relative;
+    left:0px;
+}
+
+@keyframes move {
+  0% {left: 0px; bottom: 0px;}
+  25% {left: -200px; bottom: -500px;}
+  50% {left: -200px; bottom: -500px;}
+  100% {left: 0px; bottom: 0px;}
+}
+
+@keyframes fadeOut {
+  0% {opacity: 1.0}
+  100% {opacity: 0.0}
+}
+
+
+</style>
+
+
+<h1 id="heading1">Workshop 4: DOM Scripting</h1>
+<hr />
+<p>In this exercise we will practice the art of DOM Scripting with JavaScript. Use the lecture-material as a reference guide side by side these exercises. It might also be a good idea to save the lines of code you write during the exercises for later use. </p>
+
+
+<h2>Exercise 1: Basic  DOM Manipulation</h2>
+<p>&nbsp;Below you will see three buttons. Edit the source code and add an onClick-events to these buttons. Use Developer Console to find the </p>
+<p>
+  <button onclick="button1()">Button 1</button>
+  <button onclick="button2()">Button 2</button>
+  <button onclick="button3()">Button 3</button>
+</p>
+
+<ul>
+  <li>The first button should run a JavaScript-function, which will find the reference to &quot;Workshop 4&quot; heading on this page and change the contents of it to &quot;Modified Heading!&quot;. </li>
+  <li> The second button should run a function, which </li>
+  will modify the style of the &quot;Exercise 2&quot; heading on this page. JavaScript should change at least the font size, style and color and the background color
+  <li>The third button should append the following text paragraph after the <strong>4th paragraph tag &lt;p&gt;</strong> on the page (without overwriting the current content). Change the background of the entire page as well. Note: The Lorem ipsum text should be in italics. It should also add a logo image of some sort after the text.<br>
+    <br>
+  <strong id="lorem"><em>&quot;Lorem ipsum</em></strong><em> dolor sit amet, consectetuer   adipiscing elit. Sed posuere interdum sem. Quisque ligula eros   ullamcorper quis, lacinia quis facilisis sed sapien. Mauris varius diam   vitae arcu. Sed arcu lectus auctor vitae, consectetuer et venenatis eget   velit. &quot;</em></li>
+</ul>
+
+<h2 id="heading2">Exercise 2: DOM Traversing using ID's and classes</h2>
+<p class="surprise">Add onchange -events to following checkboxes.</p>
+<p>
+  <label>
+    <input onchange="hide()" name="CheckboxGroup1" type="checkbox" id="CheckboxGroup1_0" title="Actions" value="1">
+   Hide me </label>
+  <br>
+  <label>
+    <input onchange="show()" type="checkbox" name="CheckboxGroup1" value="2" id="CheckboxGroup1_1">
+    Show me</label>
+  <br>
+  <label>
+    <input onchange="surprise()" type="checkbox" name="CheckboxGroup1" value="3" id="CheckboxGroup1_2"> 
+    <span id="surpise">Surprise</span>
+  </label>
+</p>
+<ul>
+  <li>First checkbox: Find out which element has been described with the id &quot;data&quot;. Change the visibility (display value) of the element to none. What happens?</li>
+  <li>Second checkbox should return the visibility of the element to a normal state (block).</li>
+  <li>Third checkbox should find the elements with class &quot;surprise&quot; and change the font size to 20.</li>
+</ul>
+<p>&nbsp;</p>
+  <h2>Exercise 3: Images and pulldowns</h2>
+<li>Write a JavaScript function, which will fire when the pulldown menu item is changed. Show the users choice using alert -box.</li>
+<li>When the mouse is moved on top of the image, a colored border should appear surrounding it. On mouse out, border should disappear</li>
+<li>When you have accomplished the above, change the image (id=&quot;carimage&quot;) below based on the users choice on the pulldown menu below. Find appropriate images from the web.
+  <p>Select a new car from the list.</p>
+  <select name="mySelect" id="mySelect" onchange="showNewChoice()">
+    <option value="BMW">BMW         
+    <option value="Audi">Audi
+    <option value="Mercedes">Mercedes
+    <option value="Volvo">Volvo
+  </select>
+  <br>
+  <br>
+<img onmouseover="mouseOver()" onmouseout="mouseOut()" style="left: 0px; opacity: 1;" src="https://www.bmw.fi/content/dam/bmw/common/all-models/2-series/gran-coupe/2019/Inspire-Highligt/bmw-2-series-gran-coupe-inspire-ag-sp-xxl.jpg" width="400" height="400" id="carimage"/></li>
+<h2>Exercise 4: Moving things around</h2>
+<ul>
+  <li>
+    <p class="surprise">You can do neat things by editing CSS-rules via  JavaScript. See the examples in lecture slides. Then try these:</p>
+    <ol>
+      <li><button onclick="changePosition()">Move!</button>Select the div with an id &quot;carimage&quot; and move it 200px left and 500px down</li>
+      <li><button onclick="setInterval(function(){doMove();},1000); "/>Animate</button> Write a  funtion doMove() which  will move the image across the screen, or even better: back and forth on  the screen. The Interval required has already been added to the onclick -event of the list item.</li>
+      <li><button onclick="setInterval(function(){fadeOut();},250);"/>Fade out!</button> Wite  a function fadeOut() which will slowly decrease the opacity of the image from 1.0 to  0 making it fade out. The Interval required has already been added to the onclick -event of the list item</li>
+      <li><button onclick="hide()"/>Disappear! </button>Finally, write JavaScript which will remove the image from the page</li>
+    </ol>
+  </li>
+</ul>
+
+<h2>Exercise 5: Tables</h2>
+<ul>
+  <li class="surprise">Write a JavaScript function to  add rows to a table</li>
+  . Rows can contain preset values.
+  <li>When your code is working, try reading the content to be added from a set of fields below the table.</li>
+  <br>
+  <table id="data" class="display" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Salary</th>
+      </tr>
+    </thead>
+    <tfoot>
+    </tfoot>
+    <tbody>
+      <tr>
+        <td>Tiger Nixon</td>
+        <td>System Architect</td>
+        <td>$320,800</td>
+      </tr>
+      <tr>
+        <td>Garrett Winters</td>
+        <td>Accountant</td>
+        <td>$170,750</td>
+      </tr>
+      <tr>
+        <td>Ashton Cox</td>
+        <td>Junior Technical Author</td>
+        <td>$86,000</td>
+      </tr>
+      <tr>
+        <td>Cedric Kelly</td>
+        <td>Senior Javascript Developer</td>
+        <td>$433,060</td>
+      </tr>
+      <tr>
+        <td>Airi Satou</td>
+        <td>Accountant</td>
+        <td>$162,700</td>
+      </tr>
+    </tbody>
+  </table>
+</ul>
+<p>
+  Name
+    <label for="textfield">:</label>
+  <input type="text" name="textfield" id="textfield">
+  <br>
+  Position:
+  <input type="text" name="textfield2" id="textfield2">
+<br>
+Salary: 
+<input type="text" name="textfield3" id="textfield3">
+<br>
+<input type="button" onclick="insertRows()" name="Insert" id="Insert" value="Insert">
+</p>
+<h2>Bonus exercises for the enthusiastics</h2>
+<ul>
+  <li dir="ltr">
+    <p dir="ltr">Write a loop, which goes through all the LI tags in the page and replaces them with a &lt;strong&gt; tagged, red text saying &quot;Replaced&quot;.</p>
+  </li>
+  <li dir="ltr">How would you replace the contents only on the ones with the word &lsquo;Select&rsquo; in them?</li></ul>
+
+<script>
+
+
+    var man = ["BMW", "Audi", "Mercedes", "Volvo"];
+    var links = ["https://www.bmw.fi/content/dam/bmw/common/all-models/2-series/gran-coupe/2019/Inspire-Highligt/bmw-2-series-gran-coupe-inspire-ag-sp-xxl.jpg",
+        "https://cdn.tekniikanmaailma.fi/wp-content/uploads/s3/2019/06/25154350/0625-audi-a4-768x511.jpg",
+        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2020-mercedes-amg-cla35-101-1576122957.jpg?crop=0.556xw:0.557xh;0.364xw,0.316xh&resize=480:*",
+        "https://cdn.tekniikanmaailma.fi/wp-content/uploads/2019/04/0410-volvo-s60-polestar1-768x512.jpg"];
+
+    function button1() {
+        var heading = document.getElementById("heading1");
+        heading.innerHTML = "Modified Heading!";
+    }
+
+    function button2() {
+        var heading = document.getElementById("heading2");
+        heading.style.backgroundColor = "blue";
+        heading.style.fontSize = "35px";
+        heading.style.color = "red";
+    }
+
+    function button3() {
+        var paragraph = document.getElementsByClassName("surprise");
+        paragraph[0].innerHTML = paragraph[0].innerHTML + "<br><i>&quotLorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed posuere interdum sem. Quisque ligula eros ullamcorper quis, lacinia quis facilisis sed sapien. Mauris varius diam vitae arcu. Sed arcu lectus auctor vitae, consectetuer et venenatis eget velit.&quot</i>";
+    }
+
+    function hide() {
+        var data = document.getElementById("data");
+        data.style.display = "none";
+    }
+
+    function show() {
+        var data = document.getElementById("data");
+        data.style.display = "inline";
+    }
+
+    function surprise() {
+        var elements = document.getElementsByClassName("surprise");
+
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.fontSize = "20px";
+        }
+    }
+
+    function showNewChoice() {
+        var select = document.getElementById("mySelect");
+        alert(select.options[select.selectedIndex].text);
+
+        for (var i = 0; i < man.length; i++) {
+            if (select.options[select.selectedIndex].text == man[i]) {
+                var img = document.getElementById("carimage");
+                img.src = links[i];
+            }
+        }
+    }
+
+    function mouseOver() {
+        var img = document.getElementById("carimage");
+        img.style.border = "20px solid green";
+    }
+
+    function mouseOut() {
+        var img = document.getElementById("carimage");
+        img.style.border = "0px solid green";
+    }
+
+    function changePosition() {
+        var img = document.getElementById("carimage");
+        img.style.position = "relative";
+        img.style.left = "-200px";
+        img.style.bottom = "-500px";
+    }
+
+    function doMove() {
+        var img = document.getElementById("carimage");
+        img.style.animationName = "move";
+        img.style.animationDuration = "4s";
+    }
+
+    function fadeOut() {
+        var img = document.getElementById("carimage");
+        img.style.animationName = "fadeOut";
+        img.style.animationDuration = "4s";
+    }
+
+    function hide() {
+        var img = document.getElementById("carimage");
+        img.remove();
+    }
+
+    function insertRows() {
+        var table = document.getElementById("data");
+        var newRow = table.insertRow(table.rows.length);
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+
+        cell1.innerHTML = document.getElementById("textfield").value;
+        cell2.innerHTML = document.getElementById("textfield2").value;
+        cell3.innerHTML = document.getElementById("textfield3").value; 
+    }
+
+    function bonus() {
+        var elements = document.getElementsByTagName("li");
+        for (var i = 0; i < elements.length; i++) {
+            //var children = elements[i].children;
+            //for (var i = 0; i < children.length; i++) {
+            //    if (children[i].innerHTML.includes("select")) {
+            //        console.log("hello");
+            //    }
+            //}
+            if (elements[i].innerHTML.includes("select")) {
+                elements[i].innerHTML = "<strong>" + "REPLACED";
+                elements[i].style.color = "red";
+            }
+        }
+    }
+
+</script>
+
+</html>
+
+
