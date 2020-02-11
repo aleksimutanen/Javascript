@@ -84,7 +84,7 @@ required>
 			<div><label for="years">Years</label><input type="number" 
 name="years" id="years" min="1" required></div>
 			<div><label for="cost">Cost</label><input type="text" name="cost" 
-id="cost" disabled></div>
+id="cost" disabled><span id="discount2"></span></div>
 			<input type="submit" value="Calculate" id="submit">
   </fieldset>
 </form>
@@ -115,10 +115,12 @@ name="price" id="price" value="1.00" required></div>
 id="tax" value="0.0" required></div>
 			<div><label for="discount">Discount</label><input type="text" 
 name="discount" id="discount" value="0.00" required></div>
+            <div><label for="shipping">Shipping</label><input type="text" 
+name="shipping" id="shipping" value="10.00" disabled></div>
 			<div><label for="total">Total</label><input type="text" name="total" 
 id="total" value="0.00"></div>
 			<div><input type="submit" value="Calculate" id="submit" 
-onClick="calculate()"></div>
+onClick="calculatePrice()"></div>
      </fieldset>
 
 
@@ -169,10 +171,45 @@ asks detailed information regarding on the selected   contact method.</p>
             }
             return false;
         }
+    }
 
-        function calculate() {
+    function calculate() {
+        var type = document.getElementById("type");
+        var sub = type.options[type.selectedIndex].text
+        var b = sub.trim().split("$");
+        //console.log(b[1]);
 
+        var d = parseFloat(b[1]);
+        //console.log(d);
+
+        var years = document.getElementById("years").value;
+        var g = parseFloat(years);
+
+        var cost = document.getElementById("cost");
+        cost.disabled = false;
+
+        if (g > 1) {
+            console.log("eligible");
+            var discount = document.createElement("b");
+            var text = document.createTextNode("Eligible for discount!");
+            discount.appendChild(text);
+
+            var feedback = document.getElementById("discount2").appendChild(discount);
+            if (g > 4) {
+                alert("whaling out of control!");
+                cost.innerText = "" + ((d * g) * 0.80) - 5;
+                console.log(((d * g) * 0.80) - 5);
+            } else {
+                cost.innerText = "" + ((d * g) * 0.80);
+                console.log(((d * g) * 0.80));
+            }
+
+        } else {
+            cost.innerText = "" + d * g;
+            console.log(d * g);
         }
+
+        return false;
     }
 
 </script>
