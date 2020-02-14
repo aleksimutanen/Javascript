@@ -136,7 +136,45 @@ asks detailed information regarding on the selected   contact method.</p>
   </li>
 </ul>
 
+<form name="contactForm" onsubmit="return sendData()">
+    <p>How would you like to be contacted?</p>
+    <div>
+        <label for="emailCheckbox">Email</label><input type="checkbox" name="emailCheckbox" id="emailCheckbox" onclick="showEmailField()"/>
+    </div>
+    <div>
+        <label for="phoneCheckbox">Phone</label><input type="checkbox" name="phoneCheckbox" id="phoneCheckbox" onclick="showPhoneField()"/>
+    </div>
+    <div>
+        <label for="mailCheckbox">Mail</label><input type="checkbox" name="mailCheckbox" id="mailCheckbox" onclick="showAddressField()"/>
+    </div>
+
+    <div  id="emailAddress">
+        Email address:<br>
+        <input type="text">
+        <br>
+    </div>
+    <div  id="phoneNumber">
+        Phone number:<br>
+        <input type="text">
+        <br>
+    </div>
+    <div  id="address">
+        Address:<br>
+        <input type="text">
+        <br>
+    </div>
+    
+    Comment:<br>
+    <textarea name="comment" id="commentArea"></textarea>
+    <br>
+    <input type="submit" value="Send">
+</form>
+
 <script>
+
+    showAddressField();
+    showPhoneField();
+    showEmailField();
 
     function getData() {
         var form = document.forms.myForm;
@@ -210,6 +248,49 @@ asks detailed information regarding on the selected   contact method.</p>
         }
 
         return false;
+    }
+
+    function showEmailField() {
+        var field = document.getElementById("emailAddress");
+        var checkbox = document.forms.contactForm.emailCheckbox.checked;
+
+        if (!checkbox) {
+            console.log("none");
+            field.style.display = "none";
+        } else {
+            console.log("block");
+            field.style.display = "block";
+        }
+    }
+
+    function showPhoneField() {
+        var field = document.getElementById("phoneNumber");
+        var checkbox = document.forms.contactForm.phoneCheckbox.checked;
+
+        if (!checkbox) {
+            console.log("none");
+            field.style.display = "none";
+        } else {
+            console.log("block");
+            field.style.display = "block";
+        }
+    }
+
+    function showAddressField() {
+        var field = document.getElementById("address");
+        var checkbox = document.forms.contactForm.mailCheckbox.checked;
+
+        if (!checkbox) {
+            console.log("none");
+            field.style.display = "none";
+        } else {
+            console.log("block");
+            field.style.display = "block";
+        }
+    }
+
+    function sendData() {
+
     }
 
 </script>
