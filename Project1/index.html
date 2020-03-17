@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="todostyles.css">
+</head>
+<body>
+
+    <h2>Shopping list</h2>
+    <form action="" name="todoform" onsubmit="return addToList()">
+        <input type="text" id="product" placeholder="product name" />
+        <br />
+        <input type="text" id="price" placeholder="price in 0.00" />
+        <br />
+        <input type="submit" value="Add to list" id="submit" />
+    </form>
+
+    <ul id="todolist">
+    </ul>
+
+    <script src="todojs.js"></script>
+</body>
+</html>

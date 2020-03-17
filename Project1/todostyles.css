@@ -1,0 +1,16 @@
+﻿body {
+    text-align: center;
+}
+
+form {
+    /*margin: 50px;*/
+}
+
+input {
+    padding: 20px;
+    margin: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
