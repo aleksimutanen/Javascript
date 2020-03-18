@@ -1,9 +1,13 @@
 ﻿body {
+    margin: auto;
+    width: 50%;
     text-align: center;
+    background-color: black;
+    color: white;
 }
 
 form {
-    /*margin: 50px;*/
+    background-color: black;
 }
 
 input {
@@ -13,4 +17,6 @@ input {
 
 ul {
     list-style-type: none;
+    background-color: black;
+    color: white;
 }

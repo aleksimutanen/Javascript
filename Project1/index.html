@@ -8,15 +8,18 @@
 </head>
 <body>
 
-    <h2>Shopping list</h2>
+    <h1>Shopping list</h1>
     <form action="" name="todoform" onsubmit="return addToList()">
         <input type="text" id="product" placeholder="product name" />
+        <span id="productFail"></span>
         <br />
         <input type="text" id="price" placeholder="price in 0.00" />
+        <span id="priceFail"></span>
         <br />
         <input type="submit" value="Add to list" id="submit" />
     </form>
 
+    <h2>List:</h2>
     <ul id="todolist">
     </ul>
 
