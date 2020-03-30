@@ -1,7 +1,21 @@
 // JavaScript source code
+var index = localStorage.length;
+
+
+////////
+////TODO : removing items from list and database
+///////
 
 function addToList() {
     'use strict';
+
+    //check if storage is supported
+    if (typeof (Storage) !== "undefined") {
+        console.log("storage supported");
+    } else {
+        console.log("storage unsupported");
+        return false;
+    }
 
     //debug if function is being called or not
     console.log("xd");
@@ -51,7 +65,8 @@ function addToList() {
     //add a new list item
     list.innerHTML += "<li onClick='removeFromList(this)'><input type='checkbox' onClick='checkBoxChange(this)'>" + product + ", " + price + "</li>";
 
-    
+    localStorage.setItem("item" + index, product + ", " + price);
+
     //productElement.innerHTML = "";
     //priceElement.innerHTML = "";
 
@@ -59,7 +74,9 @@ function addToList() {
     productFeedback.innerHTML = "";
     priceFeedback.innerHTML = "";
 
-    return false;
+    index++;
+
+    return true;
 }
 
 //remove items from the list
@@ -73,5 +90,23 @@ function checkBoxChange(element) {
         console.log("checked");
     } else {
         console.log("unchecked");
+    }
+}
+
+function onLoad() {
+    if (localStorage.length == 0) {
+        console.log("list empty");
+        return false;
+    } else {
+        console.log("list not empty");
+
+        var list = document.getElementById("shoppinglist");
+
+        for (var i = 0; i < localStorage.length; i++) {
+            var item = localStorage.key(i);
+            item = localStorage.getItem(item).split(",");
+            list.innerHTML += "<li onClick='removeFromList(this)'><input type='checkbox' onClick='checkBoxChange(this)'>" + item[0] + ", " + item[1] + "</li>";
+        }
+
     }
 }
