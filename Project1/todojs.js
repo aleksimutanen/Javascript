@@ -81,6 +81,8 @@ function addToList() {
 
 //remove items from the list
 function removeFromList(element) {
+    var list = document.getElementById("shoppinglist");
+
     element.remove();
 }
 
