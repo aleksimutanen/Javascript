@@ -1,0 +1,26 @@
+﻿body
+{
+}
+
+.albumName {
+    text-align: center;
+}
+
+.resultItemName {
+    text-align: center;
+    font-size: 50%;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.resultImage {
+    background-color: red;
+    height: 174px;
+    /*margin-left: auto;
+    margin-right: auto;*/
+}
