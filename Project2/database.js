@@ -75,7 +75,7 @@ function trackGetInfo(name, artist) {
             var areaBio = document.getElementById("trackBio");
             var areaHeadline = document.getElementById("trackHeadline");
 
-            if (data.track.wiki == null || data.track.wiki) {
+            if (data.track.wiki == null) {
                 areaBio.innerHTML = "<p>" + "track data not available..." + "</p>";
             } else {
                 areaBio.innerHTML = "<p>" + data.track.wiki.content + "</p>";
@@ -134,7 +134,7 @@ function artistGetInfo(name, area) {
             var similarArea = document.getElementById("similarArtists");
             var areaTags = document.getElementById("artistTags");
 
-            if (data.artist.bio == null || data.artist.bio) {
+            if (data.artist.bio == null) {
                 areaBio.innerHTML = "<p>" + "artist data not available..." + "</p>";
             } else {
                 areaBio.innerHTML = "<p>" + data.artist.bio.content + "</p>";
@@ -309,7 +309,7 @@ function albumGetInfo(artist, name) {
             var trackListHeadline = document.getElementById("trackListingHeadline");
             var trackList = document.getElementById("trackListing");
 
-            if (data.album.wiki == null || data.album.wiki) {
+            if (data.album.wiki == null) {
                 areaBio.innerHTML = "<p>" + "album data not available..." + "</p>";
             } else {
                 areaBio.innerHTML = "<p>" + data.album.wiki.content + "</p>";
@@ -393,7 +393,7 @@ function tagGetInfo(name, area) {
             var areaBio = document.getElementById("tagBio");
             var areaHeadline = document.getElementById("tagHeadline");
 
-            if (data.tag.wiki == null || data.tag.wiki) {
+            if (data.tag.wiki == null) {
                 areaBio.innerHTML = "<p>" + "tag data not available..." + "</p>";
             } else {
                 areaBio.innerHTML = "<p>" + data.tag.wiki.content + "</p>";
