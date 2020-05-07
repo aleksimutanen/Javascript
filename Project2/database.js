@@ -1,3 +1,4 @@
+
 var tagPage = document.getElementById("tagInfo");
 var artistPage = document.getElementById("artistInfo");
 var albumPage = document.getElementById("albumInfo");
@@ -6,6 +7,24 @@ var searchPage = document.getElementById("search");
 
 var pages = new Array(tagPage, artistPage, albumPage, trackPage, searchPage);
 
+var pageHistory = [];
+var pageIndex = -1;
+
+
+
+function backward() {
+    if (pageIndex <= 0) return;
+    pageIndex -= 2;
+    window[pageHistory[pageIndex + 1].name](pageHistory[pageIndex + 1].parameter);
+}
+
+function forward() {
+    if (pageIndex + 1 == pageHistory.length) return;
+    window[pageHistory[pageIndex + 1].name](pageHistory[pageIndex + 1].parameter);
+}
+
+
+
 function hideAllPages() {
     for (var i = 0; i < pages.length; i++) {
         pages[i].style.display = "none";
@@ -13,7 +32,12 @@ function hideAllPages() {
 }
 
 
-function getTrackPage(track) {
+
+function gettrackPage(track) {
+    pageIndex++;
+    pageHistory[pageIndex] = { name: "gettrackPage", parameter: track };
+
+
     var trackName = track.innerHTML;
     var artistName = track.name;
 
@@ -51,7 +75,12 @@ function trackGetInfo(name, artist) {
             var areaBio = document.getElementById("trackBio");
             var areaHeadline = document.getElementById("trackHeadline");
 
-            areaBio.innerHTML = "<p>" + data.track.wiki.content + "</p>";
+            if (data.track.wiki == null || data.track.wiki) {
+                areaBio.innerHTML = "<p>" + "track data not available..." + "</p>";
+            } else {
+                areaBio.innerHTML = "<p>" + data.track.wiki.content + "</p>";
+            }
+
             areaHeadline.innerHTML = "About " + data.track.name + ":";
 
         }
@@ -59,7 +88,12 @@ function trackGetInfo(name, artist) {
 }
 
 
-function getArtistPage(artist) {
+
+function getartistPage(artist) {
+    pageIndex++;
+    pageHistory[pageIndex] = { name: "getartistPage", parameter: artist };
+
+
     console.log("START ARTIST PAGE");
 
     hideAllPages();
@@ -74,14 +108,6 @@ function getArtistPage(artist) {
 
 function artistGetInfo(name, area) {
     console.log("start " + area + " getinfo on: " + name);
-
-    //FOR SELECTING FROM A LIST
-    //var cityDiv = document.getElementById("city");
-    //cityName = cityDiv.options[cityDiv.selectedIndex].text
-
-    //FOR TYPING IN THE SEARCH FIELD
-    //var searchBar = document.getElementById("citysearch");
-    //cityName = searchBar.value;
 
     var method = area + ".getinfo";
     var search = name;
@@ -108,6 +134,11 @@ function artistGetInfo(name, area) {
             var similarArea = document.getElementById("similarArtists");
             var areaTags = document.getElementById("artistTags");
 
+            if (data.artist.bio == null || data.artist.bio) {
+                areaBio.innerHTML = "<p>" + "artist data not available..." + "</p>";
+            } else {
+                areaBio.innerHTML = "<p>" + data.artist.bio.content + "</p>";
+            }
 
             areaBio.innerHTML = "<p>" + data.artist.bio.content + "</p>";
             areaHeadline.innerHTML = "About " + data.artist.name + ":";
@@ -121,7 +152,7 @@ function artistGetInfo(name, area) {
             for (var i = 0; i < data.artist.similar.artist.length; i++) {
 
                 similarAreaOutput += "<li class='nav-item'>";
-                similarAreaOutput += "<a class='nav-link' href='#' onclick='getArtistPage(this)'>" + data.artist.similar.artist[i].name + "</a>";
+                similarAreaOutput += "<a class='nav-link' href='#' onclick='getartistPage(this)'>" + data.artist.similar.artist[i].name + "</a>";
                 similarAreaOutput += "</li>";
             }
 
@@ -135,7 +166,7 @@ function artistGetInfo(name, area) {
             for (var i = 0; i < data.artist.tags.tag.length; i++) {
 
                 areaTagsOutput += "<li class='nav-item'>";
-                areaTagsOutput += "<a class='nav-link' href='#' onclick='getTagPage(this)'>" + data.artist.tags.tag[i].name + "</a>";
+                areaTagsOutput += "<a class='nav-link' href='#' onclick='gettagPage(this)'>" + data.artist.tags.tag[i].name + "</a>";
                 areaTagsOutput += "</li>";
             }
 
@@ -148,14 +179,6 @@ function artistGetInfo(name, area) {
 
 function artistGetTopAlbums(name, area) {
     console.log("start " + area + " getinfo on: " + name);
-
-    //FOR SELECTING FROM A LIST
-    //var cityDiv = document.getElementById("city");
-    //cityName = cityDiv.options[cityDiv.selectedIndex].text
-
-    //FOR TYPING IN THE SEARCH FIELD
-    //var searchBar = document.getElementById("citysearch");
-    //cityName = searchBar.value;
 
     var method = "artist.gettopalbums";
     var search = name;
@@ -186,7 +209,7 @@ function artistGetTopAlbums(name, area) {
 
                 topAreaOutput += "<li class='nav-item'>";
                 topAreaOutput += "<img src='" + data.topalbums.album[i].image[3]["#text"] + "' alt='failed to load'><br>";
-                topAreaOutput += "<a class='nav-link albumName' href='#' onclick='getAlbumPage(this)' name='" + data.topalbums.album[i].artist.name + "'>" + data.topalbums.album[i].name + "</a>";
+                topAreaOutput += "<a class='nav-link albumName' href='#' onclick='getalbumPage(this)' name='" + data.topalbums.album[i].artist.name + "'>" + data.topalbums.album[i].name + "</a>";
                 topAreaOutput += "</li>";
             }
 
@@ -229,7 +252,7 @@ function artistGetTopTracks(name, area) {
 
                 topAreaOutput += "<li class='nav-item'>";
                 topAreaOutput += "<img src='" + data.toptracks.track[i].image[2]["#text"] + "' alt='failed to load'><br>";
-                topAreaOutput += "<a class='nav-link albumName' onclick='getTrackPage(this)' href='#' name='" + data.toptracks.track[i].artist.name + "'>" + data.toptracks.track[i].name + "</a>";
+                topAreaOutput += "<a class='nav-link albumName' onclick='gettrackPage(this)' href='#' name='" + data.toptracks.track[i].artist.name + "'>" + data.toptracks.track[i].name + "</a>";
                 topAreaOutput += "</li>";
             }
 
@@ -242,7 +265,9 @@ function artistGetTopTracks(name, area) {
 
 
 
-function getAlbumPage(album) {
+function getalbumPage(album) {
+    pageIndex++;
+    pageHistory[pageIndex] = { name: "getalbumPage", parameter: album };
 
     var albumName = album.innerHTML;
     var artistName = album.name;
@@ -263,7 +288,7 @@ function albumGetInfo(artist, name) {
     var format = "json";
     var apiKey = "4caf6b0a2f5bdf928767aa1fcce128be";
 
-    var url = "http://ws.audioscrobbler.com/2.0/" + "?method=" + method + "&api_key=" + apiKey + "&artist=" + artist + "&album=" + search  + "&format=" + format;
+    var url = "http://ws.audioscrobbler.com/2.0/" + "?method=" + method + "&api_key=" + apiKey + "&artist=" + artist + "&album=" + search + "&format=" + format;
     var xmlHTTP = new XMLHttpRequest();
     xmlHTTP.open("GET", url, true);
     xmlHTTP.send();
@@ -284,7 +309,12 @@ function albumGetInfo(artist, name) {
             var trackListHeadline = document.getElementById("trackListingHeadline");
             var trackList = document.getElementById("trackListing");
 
-            areaBio.innerHTML = "<p>" + data.album.wiki.content + "</p>";
+            if (data.album.wiki == null || data.album.wiki) {
+                areaBio.innerHTML = "<p>" + "album data not available..." + "</p>";
+            } else {
+                areaBio.innerHTML = "<p>" + data.album.wiki.content + "</p>";
+            }
+
             areaHeadline.innerHTML = "About " + data.album.name + ":";
             tagsHeadline.innerHTML = "Tags: ";
             areaImage.innerHTML = "<img src='" + data.album.image[4]["#text"] + "' alt='xd'>"
@@ -297,7 +327,7 @@ function albumGetInfo(artist, name) {
             for (var i = 0; i < data.album.tags.tag.length; i++) {
 
                 areaTagsOutput += "<li class='nav-item'>";
-                areaTagsOutput += "<a class='nav-link' href='#' onclick='getTagPage(this)'>" + data.album.tags.tag[i].name + "</a>";
+                areaTagsOutput += "<a class='nav-link' href='#' onclick='gettagPage(this)'>" + data.album.tags.tag[i].name + "</a>";
                 areaTagsOutput += "</li>";
             }
 
@@ -311,7 +341,7 @@ function albumGetInfo(artist, name) {
             for (var i = 0; i < data.album.tracks.track.length; i++) {
 
                 trackListingOutput += "<li class='nav-item'>";
-                trackListingOutput += "<a class='nav-link' onclick='getTrackPage(this)' href='#' name='" + data.album.artist + "'>" + data.album.tracks.track[i].name + "</a>";
+                trackListingOutput += "<a class='nav-link' onclick='gettrackPage(this)' href='#' name='" + data.album.artist + "'>" + data.album.tracks.track[i].name + "</a>";
                 trackListingOutput += "</li>";
             }
 
@@ -324,7 +354,10 @@ function albumGetInfo(artist, name) {
 
 
 
-function getTagPage(tag) {
+function gettagPage(tag) {
+    pageIndex++;
+    pageHistory.push({ name: "gettagPage", parameter: tag });
+
     var tagName = tag.innerHTML;
 
     hideAllPages();
@@ -356,10 +389,16 @@ function tagGetInfo(name, area) {
 
             console.log(data);
 
+
             var areaBio = document.getElementById("tagBio");
             var areaHeadline = document.getElementById("tagHeadline");
 
-            areaBio.innerHTML = "<p>" + data.tag.wiki.content + "</p>";
+            if (data.tag.wiki == null || data.tag.wiki) {
+                areaBio.innerHTML = "<p>" + "tag data not available..." + "</p>";
+            } else {
+                areaBio.innerHTML = "<p>" + data.tag.wiki.content + "</p>";
+            }
+
             areaHeadline.innerHTML = "About " + data.tag.name + ":";
 
         }
@@ -400,7 +439,7 @@ function tagGetArtists(name, area) {
             for (var i = 0; i < 6; i++) {
 
                 tagArtistOutput += "<li class='nav-item'>";
-                tagArtistOutput += "<a class='nav-link' href='#' onclick='getArtistPage(this)'>" + data.topartists.artist[i].name + "</a>";
+                tagArtistOutput += "<a class='nav-link' href='#' onclick='getartistPage(this)'>" + data.topartists.artist[i].name + "</a>";
                 tagArtistOutput += "</li>";
             }
 
@@ -413,6 +452,9 @@ function tagGetArtists(name, area) {
 
 
 function search() {
+    pageIndex++;
+    pageHistory[pageIndex] = { name: "search", parameter: "" };
+
     console.log("START SEARCH");
 
     hideAllPages();
@@ -424,9 +466,14 @@ function search() {
         console.log("searchbar is empty");
         return false;
     }
-    artistSearch(searchword, "artist");
-    albumSearch(searchword, "album");
-    trackSearch(searchword, "track");
+
+    //artistSearch(searchword, "artist");
+    //albumSearch(searchword, "album");
+    //trackSearch(searchword, "track");
+    areaSearch(searchword, "artist");
+    areaSearch(searchword, "album");
+    areaSearch(searchword, "track");
+
 }
 
 function artistSearch(word, area) {
@@ -503,7 +550,7 @@ function artistSearch(word, area) {
 
                 }
             }
-            
+
 
             areaSearchOutput += "</ul>";
             areaSearch.innerHTML = areaSearchOutput;
@@ -560,7 +607,7 @@ function albumSearch(word, area) {
 
                     areaSearchOutput2 += "<li class='nav-item'>";
                     areaSearchOutput2 += "<img class='resultImage' src='" + data.results.albummatches.album[i].image[2]["#text"] + "' alt='no picture available :('><br>";
-                    areaSearchOutput2 += "<a class='nav-link resultItemName' onclick='getAlbumPage(this)' href='#' name='" + data.results.albummatches.album[i].artist +"'>" + data.results.albummatches.album[i].name + "</a>";
+                    areaSearchOutput2 += "<a class='nav-link resultItemName' onclick='getAlbumPage(this)' href='#' name='" + data.results.albummatches.album[i].artist + "'>" + data.results.albummatches.album[i].name + "</a>";
 
                     areaSearchOutput += "</li>";
                     areaSearchOutput2 += "</li>";
@@ -666,6 +713,90 @@ function trackSearch(word, area) {
                     areaSearchOutput2 += "<li class='nav-item'>";
                     areaSearchOutput2 += "<img class='resultImage' src='" + data.results.trackmatches.track[i].image[2]["#text"] + "' alt='failed to load'><br>";
                     areaSearchOutput2 += "<a class='nav-link resultItemName' onclick='getTrackPage(this)' href='#' name='" + data.results.trackmatches.track[i].artist + "'>" + data.results.trackmatches.track[i].name + "</a>";
+
+                    areaSearchOutput += "</li>";
+                    areaSearchOutput2 += "</li>";
+                }
+
+            }
+
+            areaSearchOutput += "</ul>";
+            areaSearch.innerHTML = areaSearchOutput;
+
+            areaSearchOutput2 += "</ul>";
+            areaSearch2.innerHTML = areaSearchOutput2;
+        }
+    }
+}
+
+function areaSearch(word, area) {
+    console.log("start " + area + " search on: " + word);
+
+    var method = area + ".search";
+    var search = word;
+    var format = "json";
+    var apiKey = "4caf6b0a2f5bdf928767aa1fcce128be";
+
+    var url = "http://ws.audioscrobbler.com/2.0/" + "?method=" + method + "&" + area + "=" + search + "&api_key=" + apiKey + "&format=" + format;
+    var xmlHTTP = new XMLHttpRequest();
+    xmlHTTP.open("GET", url, true);
+    xmlHTTP.send();
+
+    xmlHTTP.onreadystatechange = function () {
+        if (xmlHTTP.readyState == 4 && xmlHTTP.status == 200) {
+            var obj = JSON.parse(xmlHTTP.responseText);
+
+            var data = obj;
+
+            console.log(data);
+
+            var areaSearch = document.getElementById(area + "SearchResults");
+            var areaSearch2 = document.getElementById(area + "SearchResults2");
+            var areaHeadline = document.getElementById(area + "SearchHeadline");
+
+            areaHeadline.innerHTML = area + "s: ";
+
+            var areaSearchOutput = "";
+            areaSearchOutput += "<ul class='nav nav-pills'>";
+
+            var areaSearchOutput2 = "";
+            areaSearchOutput2 += "<ul class='nav nav-pills'>";
+
+            if (data.results[area + "matches"][area].length >= 6) {
+
+
+                for (var i = 0; i < 6; i++) {
+
+                    areaSearchOutput += "<li class='nav-item'>";
+                    areaSearchOutput += "<img class='resultImage' src='" + data.results[area + "matches"][area][i].image[2]["#text"] + "' alt='no picture available :('><br>";
+                    areaSearchOutput += "<a class='nav-link resultItemName' onclick='get" + area + "Page(this)' href='#' name='" + data.results[area + "matches"][area][i].artist + "'>" + data.results[area + "matches"][area][i].name + "</a>";
+
+                    i++;
+
+                    areaSearchOutput2 += "<li class='nav-item'>";
+                    areaSearchOutput2 += "<img class='resultImage' src='" + data.results[area + "matches"][area][i].image[2]["#text"] + "' alt='no picture available :('><br>";
+                    areaSearchOutput2 += "<a class='nav-link resultItemName' onclick='get" + area + "Page(this)' href='#' name='" + data.results[area + "matches"][area][i].artist + "'>" + data.results[area + "matches"][area][i].name + "</a>";
+
+                    areaSearchOutput += "</li>";
+                    areaSearchOutput2 += "</li>";
+
+                }
+
+            } else {
+
+                for (var i = 0; i < data.results[area + "matches"][area].length; i++) {
+
+                    areaSearchOutput += "<li class='nav-item'>";
+                    areaSearchOutput += "<img class='resultImage' src='" + data.results[area + "matches"][area][i].image[2]["#text"] + "' alt='no picture available :('><br>";
+                    areaSearchOutput += "<a class='nav-link resultItemName' onclick='get" + area + "Page(this)' href='#' name='" + data.results[area + "matches"][area][i].artist + "'>" + data.results[area + "matches"][area][i].name + "</a>";
+
+                    if ((i + 1) == data.results[area + "matches"][area].length) break;
+
+                    i++;
+
+                    areaSearchOutput2 += "<li class='nav-item'>";
+                    areaSearchOutput2 += "<img class='resultImage' src='" + data.results[area + "matches"][area][i].image[2]["#text"] + "' alt='no picture available :('><br>";
+                    areaSearchOutput2 += "<a class='nav-link resultItemName' onclick='get" + area + "Page(this)' href='#' name='" + data.results[area + "matches"][area][i].artist + "'>" + data.results[area + "matches"][area][i].name + "</a>";
 
                     areaSearchOutput += "</li>";
                     areaSearchOutput2 += "</li>";
